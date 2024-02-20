@@ -1,0 +1,12 @@
+<div class="container-products">
+    {% for product in products %}
+        <div class="card object-product" style="width: 18rem;">
+            <img width="200" height="200" src="/products/{{ product.picture }}">
+            <div class="card-body">
+                <h5><u>{{ product.name }}</u></h5>
+                <h6><strong>{{ product.price }}€</strong></h6>
+                <a href="{{ path("app_product_page", {id:product.id}) }}">Voir le produit</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,20 @@
+<div class="basket">
+    <div class="name-basket">
+        <h1>Commande</h1>
+    </div>
+    {% if orders|length == 0 %}
+        <span>Vous n'avez aucune commande</span>
+    {% else %}
+        {% for order in orders %}
+            {% for orderLine in order.orderLines %}
+                <div class="info-product-basket info-order">
+                    <img width="180" height="180" src="/products/{{ orderLine.product.picture }}">
+                    <h2>{{ orderLine.product.name }}</h2>
+                    <input type="number" value="{{ orderLine.quantity }}" disabled>
+                    <h6><strong>{{ orderLine.product.price }}€</strong></h6>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</div>
+

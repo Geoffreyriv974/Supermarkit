@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/view_product.css" />
+{% endblock %}
+
+{% block body %}
+    {% include "includes/page_product.html.twig" %}
+{% endblock %}

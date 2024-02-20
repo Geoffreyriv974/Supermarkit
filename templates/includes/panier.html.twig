@@ -1,0 +1,44 @@
+<div class="basket">
+    <div class="name-basket">
+        <h1>Panier</h1>
+    </div>
+    <div class="container-basket">
+        {% if basket == null %}
+            <span>Le Panier est vide</span>
+        {% else %}
+            {% for orderLine in basket.orderLines %}
+                <div class="info-product-basket">
+                    <img width="180" height="180" src="/products/{{ orderLine.product.picture }}">
+                    <h2>{{ orderLine.product.name }}</h2>
+                    <input type="number" class="form-control form-stock" value="{{ orderLine.quantity }}" disabled>
+                    <h6><strong>{{ orderLine.product.price }}€</strong></h6>
+                    <a class="btn btn-dark"
+                       href="{{ path("app_reduce_product_quantity", {id:orderLine.product.id}) }}">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
+            {% endfor %}
+            <div class="valid_basket">
+                <div class="basket-amount">
+                    <h6>Total</h6>
+                    <h6>{{ basket.amount }}€</h6>
+                </div>
+                <a class="btn btn-success" href="{{ path("app_validate_basket") }}">
+                    <i class="fa-solid fa-cart-arrow-down me-2 fa-bounce"></i>
+                    COMMANDER
+                </a>
+                <div class="secure-paiements">
+                    <i class="fa-solid fa-lock"></i>
+                    <p>Paiements 100% sécurisés</p>
+                </div>
+                <div class="d-flex align-items-center gap-3 mt-5">
+                    <i class="fa-brands fa-cc-visa fa-2xl"></i>
+                    <i class="fa-brands fa-cc-paypal fa-2xl"></i>
+                    <i class="fa-brands fa-cc-apple-pay fa-2xl"></i>
+                    <i class="fa-brands fa-cc-mastercard fa-2xl"></i>
+                    <i class="fa-brands fa-cc-stripe fa-2xl"></i>
+                </div
+            </div>
+        {% endif %}
+    </div>
+</div>

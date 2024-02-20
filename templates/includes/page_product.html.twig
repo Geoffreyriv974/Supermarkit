@@ -1,0 +1,36 @@
+<div class="page-view-product">
+    <img width="350" class="object-fit-contain" src="{{ product.picture }}">
+    <div class="info-product">
+        <h1><u>{{ product.name }}</u></h1>
+        <h6 class="text-success"><strong>{{ product.price }}€</strong></h6>
+        <p>{{ product.description }}</p>
+        {% if product.stock > 0 %}
+            <div class="info-stock mb-3">
+                <i class="fa-solid fa-check fa-lg text-success"></i>
+                <p class="mb-0">En stock</p>
+            </div>
+            <p>Quantité</p>
+            <form method="post" action="{{ path('app_add_basket_page', {id: product.id}) }}"
+                  class="d-flex align-items-center gap-3">
+                <input type="number" value="1" name="quantity" class="form-control form-stock" max="{{ product.stock }}"
+                       min="1">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-cart-shopping fa-lg me-2"></i>
+                    Ajouter au panier
+                </button>
+            </form>
+            <div class="d-flex align-items-center gap-3 mt-5">
+                <i class="fa-brands fa-cc-visa fa-2xl"></i>
+                <i class="fa-brands fa-cc-paypal fa-2xl"></i>
+                <i class="fa-brands fa-cc-apple-pay fa-2xl"></i>
+                <i class="fa-brands fa-cc-mastercard fa-2xl"></i>
+                <i class="fa-brands fa-cc-stripe fa-2xl"></i>
+            </div
+        {% else %}
+            <div class="info-stock">
+                <i class="fa-solid fa-xmark fa-lg text-danger"></i>
+                <p class="mb-0">Rupture de stock</p>
+            </div>
+        {% endif %}
+    </div>
+</div>

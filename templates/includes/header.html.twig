@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <div>
+            <a href="/">
+                <img src="{{ asset("bundles/homepage/image/logo-transparent-png.png") }}" class="img-fluid" alt="logo"
+                     width="400">
+            </a>
+        </div>
+        <div>
+            <form class="d-flex" role="search">
+                <input class="search form-control me-2" type="search" placeholder="  Rechercher..." aria-label="Search">
+                <button type="submit" class="btn_search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                         class="bi bi-search" viewBox="0 0 16 16" type="submit">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        <div class="group-extend">
+            <div class="extend" id="connect">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                     class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+                </svg>
+                <a href="/login">connection</a>
+            </div>
+            {% if app.user %}
+                <style>
+                    #connect {
+                        display: none;
+                    }
+                </style>
+                <div class="extend dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd"
+                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <button class="btn_user_profil" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% set name_user = app.user.email|split('@')|first %}
+                        {{ name_user }}
+                    </button>
+                    <ul class="dropdown-menu" id="dropdown-menu">
+                        <li>
+                            <div class="user_profil">
+                                <div class="mb-3 mb-3-1">
+                                    <p><strong>{{ name_user }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="user_profil {{ is_granted('ROLE_ACCOUNTANT') or is_granted('ROLE_CASHIER')  ? "" : "d-none" }}">
+                                <div class="mb-3 mb-3-1">
+                                    <a href="/admin"><u>Administration</u></a>
+                                </div>
+                            </div>
+                            <div class="user_profil">
+                                <div class="mb-3 mb-3-1">
+                                    <a href="{{ path('app_order_page') }}"><u>Commande</u></a>
+                                </div>
+                            </div>
+                            <div class="user_profil">
+                                <div class="mb-3">
+                                    <a href="{{ path('app_logout') }}"><u>Déconnection</u></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="extend">
+                <a href="{{ path('app_basket_page') }}" class="btn btn-dark position-relative">
+                    <i class="fa-solid fa-basket-shopping fa-lg text-bg-dark"></i>
+                    {% if numberOfProduct is defined and numberOfProduct > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ numberOfProduct }}
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

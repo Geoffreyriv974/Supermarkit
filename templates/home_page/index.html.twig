@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SuperMakit{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/style-catégory.css" />
+{% endblock %}
+
+
+{% block body %}
+    {% include "includes/nav-categories.html.twig" %}
+    {% include "includes/catégorie.html.twig" %}
+{% endblock %}

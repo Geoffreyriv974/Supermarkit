@@ -1,0 +1,9 @@
+<div class="container-category">
+    {% for category in categories %}
+        <div class="object">
+            <h3><u>{{ category.name }}</u></h3>
+            <img width="200" src="{{ category.picture }}">
+            <a class="dropdown-item" href="{{ path('app_categories_page', {id:category.id}) }}">Parcourir</a>
+        </div>
+    {% endfor %}
+</div>

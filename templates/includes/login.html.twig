@@ -1,0 +1,32 @@
+<div id="logo">
+    <img src="{{ asset("bundles/homepage/image/logo-transparent-png.png") }}" class="img-fluid" alt="logo" width="600">
+</div>
+<div class="two_form">
+    <div class="formulaire">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <h1 class="h3 mb-3 font-weight-normal">Déjà client</h1>
+            <label for="username">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+            <label for="password">Password</label>
+            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <button class="btn btn-lg btn-primary" type="submit">Me connecter</button>
+        </form>
+    </div>
+    <div class="formulaire">
+        <h1 class="h3 mb-3 font-weight-normal">Nouveau client</h1>
+        <p class="info"><strong>En créant votre compte, vous pourrez :</strong></p>
+        <ul>
+            <li><u>Naviguer sur notre site en toute sécurité</u></li>
+            <li><u>Acheter nos produits</u></li>
+            <li><u>Suivre vos commandes</u></li>
+        </ul>
+        <a class="btn btn-lg btn-primary" href="/register">Créer mon compte</a>
+    </div>
+</div>
